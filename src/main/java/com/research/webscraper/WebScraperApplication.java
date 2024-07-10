@@ -2,12 +2,13 @@ package com.research.webscraper;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.reactive.config.EnableWebFlux;
 
 @SpringBootApplication
-public class WebscraperApplication {
+@EnableWebFlux
+public class WebScraperApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WebscraperApplication.class, args);
+		SpringApplication.run(WebScraperApplication.class, args);
 	}
-
 }
