@@ -2,146 +2,100 @@ package com.research.webscraper.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.research.webscraper.util.ISODate;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.relational.core.mapping.Column;
 
 import java.util.UUID;
 
-@Entity
-@Table(name = "products", indexes = {
-        @Index(name = "idx_product_id", columnList = "id")
-})
+@Table("products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "uuid", updatable = false, nullable = false)
+    @Column("uuid")
     private UUID uuid;
 
     @JsonProperty("id")
-    @Column(name = "id")
+    @Column("id")
     private String id; // Wallapop product ID
 
     @JsonProperty("title")
-    @Column(name = "title")
+    @Column("title")
     private String title;
 
     @JsonProperty("description")
-    @Column(name = "description")
+    @Column("description")
     private String description;
 
     @JsonProperty("distance")
-    @Column(name = "distance")
+    @Column("distance")
     private Integer distance;
 
     @JsonProperty("user")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private WpUser user; // Wallapop user ID
+    @Column("user_id")
+    private UUID userId; // Referencia al ID del usuario
 
     @JsonProperty("flags")
-    @Column(name = "flags")
+    @Column("flags")
     private ProductFlags flags;
 
     @JsonProperty("price")
-    @Column(name = "price")
+    @Column("price")
     private double price;
 
     @JsonProperty("currency")
-    @Column(name = "currency")
+    @Column("currency")
     private String currency;
 
     @JsonProperty("web_slug")
-    @Column(name = "web_slug")
-    private String webSlug; // product URL
+    @Column("web_slug")
+    private String webSlug;
 
     @JsonProperty("category_id")
-    @Column(name = "category_id")
-    private Integer categoryId; // Wallapop category ID
+    @Column("category_id")
+    private Integer categoryId;
 
     @JsonProperty("shipping")
-    @Embedded
     private Shipping shipping;
 
     @JsonProperty("creation_date")
-    @Column(name = "creation_date")
+    @Column("creation_date")
     private ISODate creationDate;
 
     @JsonProperty("modification_date")
-    @Column(name = "modification_date")
+    @Column("modification_date")
     private ISODate modificationDate;
 
     @JsonProperty("location")
-    @Embedded
     private Location location;
 
-    @Column(name = "scrape_date")
+    @Column("scrape_date")
     private ISODate scrapeDate;
 
-    @Column(name = "vpn_config_path")
+    @Column("vpn_config_path")
     private String vpnConfigPath;
 
-    @Column(name = "details_enriched")
-    private boolean detailsEnriched; // ¿Product is detailed?
+    @Column("details_enriched")
+    private boolean detailsEnriched;
 
+    @Column("views")
     private Integer views;
+
+    @Column("favorites")
     private Integer favorites;
+
+    @Column("brand")
     private String brand;
+
+    @Column("model")
     private String model;
+
+    @Column("condition")
     private String condition;
+
+    @Column("up_to_kg")
     private Integer upToKg;
 
-    // Constructores
-
-
-    // Getters y setters
-
-
-    public Integer getViews() {
-        return views;
-    }
-
-    public void setViews(Integer views) {
-        this.views = views;
-    }
-
-    public Integer getFavorites() {
-        return favorites;
-    }
-
-    public void setFavorites(Integer favorites) {
-        this.favorites = favorites;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getCondition() {
-        return condition;
-    }
-
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
-
-    public Integer getUpToKg() {
-        return upToKg;
-    }
-
-    public void setUpToKg(Integer upToKg) {
-        this.upToKg = upToKg;
-    }
+    // Getters y setters (mantén los que ya tienes)
 
     public UUID getUuid() {
         return uuid;
@@ -183,12 +137,12 @@ public class Product {
         this.distance = distance;
     }
 
-    public WpUser getUser() {
-        return user;
+    public UUID getUserId() {
+        return userId;
     }
 
-    public void setUser(WpUser user) {
-        this.user = user;
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
     public ProductFlags getFlags() {
@@ -285,5 +239,53 @@ public class Product {
 
     public void setDetailsEnriched(boolean detailsEnriched) {
         this.detailsEnriched = detailsEnriched;
+    }
+
+    public Integer getViews() {
+        return views;
+    }
+
+    public void setViews(Integer views) {
+        this.views = views;
+    }
+
+    public Integer getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Integer favorites) {
+        this.favorites = favorites;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
+    public Integer getUpToKg() {
+        return upToKg;
+    }
+
+    public void setUpToKg(Integer upToKg) {
+        this.upToKg = upToKg;
     }
 }

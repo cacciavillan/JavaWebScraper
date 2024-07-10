@@ -1,18 +1,62 @@
 package com.research.webscraper.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import org.springframework.data.relational.core.mapping.Column;
 
-@Embeddable
 public class Location {
-    @Column(name = "latitude")
+    @Column("latitude")
     private int latitude;
-    @Column(name = "longitude")
+
+    @Column("longitude")
     private int longitude;
-    @Column(name = "city")
+
+    @Column("city")
     private String city;
-    @Column(name = "postal_code")
+
+    @Column("postal_code")
     private int postalCode;
-    @Column(name = "country_code")
+
+    @Column("country_code")
     private String countryCode;
+
+    // Getters y setters
+
+    public int getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(int latitude) {
+        this.latitude = latitude;
+    }
+
+    public int getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(int longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
 }

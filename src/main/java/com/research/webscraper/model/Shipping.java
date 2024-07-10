@@ -1,12 +1,29 @@
 package com.research.webscraper.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import org.springframework.data.relational.core.mapping.Column;
 
-@Embeddable
 public class Shipping {
-    @Column(name = "item_is_shippable")
+    @Column("item_is_shippable")
     private boolean itemIsShippable;
-    @Column(name = "user_allows_shipping")
+
+    @Column("user_allows_shipping")
     private boolean userAllowsShipping;
+
+    // Getters y setters
+
+    public boolean isItemIsShippable() {
+        return itemIsShippable;
+    }
+
+    public void setItemIsShippable(boolean itemIsShippable) {
+        this.itemIsShippable = itemIsShippable;
+    }
+
+    public boolean isUserAllowsShipping() {
+        return userAllowsShipping;
+    }
+
+    public void setUserAllowsShipping(boolean userAllowsShipping) {
+        this.userAllowsShipping = userAllowsShipping;
+    }
 }
