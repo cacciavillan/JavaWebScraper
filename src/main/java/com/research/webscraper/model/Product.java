@@ -1,5 +1,6 @@
 package com.research.webscraper.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.research.webscraper.util.ISODate;
 import jakarta.persistence.*;
 
@@ -13,66 +14,60 @@ public class Product {
     @Column(name = "uuid", updatable = false, nullable = false)
     private UUID uuid;
 
+    @JsonProperty("id")
     @Column(name = "id")
     private String id; // Wallapop product ID
 
+    @JsonProperty("title")
     @Column(name = "title")
     private String title;
 
+    @JsonProperty("description")
     @Column(name = "description")
     private String description;
 
+    @JsonProperty("distance")
     @Column(name = "distance")
-    private int distance;
+    private Integer distance;
 
+    @JsonProperty("user")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user; // Wallapop user ID
+    private WpUser user; // Wallapop user ID
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "flag")
-    private ProductFlags flag; // PENDING, SOLD, RESERVED, BANNED, EXPIRED, ONHOLD
+    @JsonProperty("flags")
+    @Column(name = "flags")
+    private ProductFlags flags;
 
+    @JsonProperty("price")
     @Column(name = "price")
     private double price;
 
-    @Enumerated(EnumType.STRING)
+    @JsonProperty("currency")
     @Column(name = "currency")
-    private Currency currency;
+    private String currency;
 
+    @JsonProperty("web_slug")
     @Column(name = "web_slug")
     private String webSlug; // product URL
 
+    @JsonProperty("category_id")
     @Column(name = "category_id")
-    private int categoryId; // Wallapop category ID
+    private Integer categoryId; // Wallapop category ID
 
+    @JsonProperty("shipping")
     @Embedded
     private Shipping shipping;
 
-    @Column(name = "views")
-    private int views; // Total amount of product views
-
-    @Column(name = "favorites")
-    private int favorites; // Total amount of product favorites
-
-    @Column(name = "brand")
-    private String brand;
-
-    @Column(name = "model")
-    private String model;
-
-    @Enumerated(EnumType.STRING)
-    private Condition condition;  // in_box,  as_good_as_new, good, fair, has_given_it_all
-
-    @Column(name = "upToKg")
-    private int upToKg; // Estimated weight
-
+    @JsonProperty("creation_date")
     @Column(name = "creation_date")
     private ISODate creationDate;
 
+    @JsonProperty("modification_date")
     @Column(name = "modification_date")
     private ISODate modificationDate;
 
+    @JsonProperty("location")
     @Embedded
     private Location location;
 
