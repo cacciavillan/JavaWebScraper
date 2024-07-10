@@ -12,11 +12,14 @@ import reactor.core.publisher.Mono;
 @Service
 public class WebScraperService {
 
-    @Autowired
-    private WebClient webClient;
+    private final WebClient webClient;
+    private final ProductRepository productRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    public WebScraperService(WebClient webClient, ProductRepository productRepository) {
+        this.webClient = webClient;
+        this.productRepository = productRepository;
+    }
 
     public Flux<Product> scrapeProducts(String apiUrl) {
         return webClient.get()
