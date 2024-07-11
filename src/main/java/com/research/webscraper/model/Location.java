@@ -1,38 +1,44 @@
 package com.research.webscraper.model;
 
-import org.springframework.data.relational.core.mapping.Column;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
+@Embeddable
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Location {
-    @Column("latitude")
-    private int latitude;
 
-    @Column("longitude")
-    private int longitude;
+    @Column(name = "latitude")
+    private double latitude;
 
-    @Column("city")
+    @Column(name = "longitude")
+    private double longitude;
+
+    @Column(name = "city")
     private String city;
 
-    @Column("postal_code")
+    @Column(name = "postal_code")
     private int postalCode;
 
-    @Column("country_code")
+    @Column(name = "country_code")
     private String countryCode;
 
     // Getters y setters
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 

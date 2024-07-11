@@ -1,98 +1,104 @@
 package com.research.webscraper.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.research.webscraper.util.ISODate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
-import org.springframework.data.relational.core.mapping.Column;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
-@Table("products")
+@Entity
+@Table(name = "products")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
+
     @Id
-    @Column("uuid")
+    @GeneratedValue
+    @Column(name = "uuid")
     private UUID uuid;
 
     @JsonProperty("id")
-    @Column("id")
+    @Column(name = "id")
     private String id; // Wallapop product ID
 
     @JsonProperty("title")
-    @Column("title")
+    @Column(name = "title")
     private String title;
 
     @JsonProperty("description")
-    @Column("description")
+    @Column(name = "description")
     private String description;
 
     @JsonProperty("distance")
-    @Column("distance")
+    @Column(name = "distance")
     private Integer distance;
 
     @JsonProperty("user")
-    @Column("user_id")
-    private UUID userId; // Referencia al ID del usuario
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private WpUser userId; // Referencia al ID del usuario
 
     @JsonProperty("flags")
-    @Column("flags")
+    @Embedded
     private ProductFlags flags;
 
     @JsonProperty("price")
-    @Column("price")
-    private double price;
+    @Column(name = "price")
+    private Integer price;
 
     @JsonProperty("currency")
-    @Column("currency")
+    @Column(name = "currency")
     private String currency;
 
     @JsonProperty("web_slug")
-    @Column("web_slug")
+    @Column(name = "web_slug")
     private String webSlug;
 
     @JsonProperty("category_id")
-    @Column("category_id")
+    @Column(name = "category_id")
     private Integer categoryId;
 
     @JsonProperty("shipping")
+    @Embedded
     private Shipping shipping;
 
     @JsonProperty("creation_date")
-    @Column("creation_date")
+    @Column(name = "creation_date")
     private ISODate creationDate;
 
     @JsonProperty("modification_date")
-    @Column("modification_date")
+    @Column(name = "modification_date")
     private ISODate modificationDate;
 
     @JsonProperty("location")
+    @Embedded
     private Location location;
 
-    @Column("scrape_date")
+    @Column(name = "scrape_date")
     private ISODate scrapeDate;
 
-    @Column("vpn_config_path")
+    @Column(name = "vpn_config_path")
     private String vpnConfigPath;
 
-    @Column("details_enriched")
+    @Column(name = "details_enriched")
     private boolean detailsEnriched;
 
-    @Column("views")
+    @Column(name = "views")
     private Integer views;
 
-    @Column("favorites")
+    @Column(name = "favorites")
     private Integer favorites;
 
-    @Column("brand")
+    @Column(name = "brand")
     private String brand;
 
-    @Column("model")
+    @Column(name = "model")
     private String model;
 
-    @Column("condition")
+    @Column(name = "condition")
     private String condition;
 
-    @Column("up_to_kg")
+    @Column(name = "up_to_kg")
     private Integer upToKg;
 
     // Getters y setters (mantén los que ya tienes)
@@ -137,11 +143,11 @@ public class Product {
         this.distance = distance;
     }
 
-    public UUID getUserId() {
+    public WpUser getUserId() {
         return userId;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(WpUser userId) {
         this.userId = userId;
     }
 
@@ -153,11 +159,11 @@ public class Product {
         this.flags = flags;
     }
 
-    public double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

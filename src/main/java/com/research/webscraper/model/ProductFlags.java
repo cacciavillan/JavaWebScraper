@@ -1,11 +1,25 @@
 package com.research.webscraper.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
+@Embeddable
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductFlags {
+
+    @Column(name = "pending")
     private boolean pending;
+    @Column(name = "sold")
     private boolean sold;
+    @Column(name = "reserved")
     private boolean reserved;
+    @Column(name = "banned")
     private boolean banned;
+    @Column(name = "expired")
     private boolean expired;
+    @Column(name = "onhold")
     private boolean onhold;
 
     // Getters y setters

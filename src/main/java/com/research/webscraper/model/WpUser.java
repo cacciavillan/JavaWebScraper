@@ -1,24 +1,29 @@
 package com.research.webscraper.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
-@Table("wp_user")
+@Entity
+@Table(name = "wp_user")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class WpUser {
+
     @Id
+    @GeneratedValue
     private UUID uuid;
 
     @JsonProperty("id")
+    @Column(name = "id")
     private String id;
 
     @JsonProperty("micro_name")
+    @Column(name = "micro_name")
     private String microName;
 
     // Constructores, getters y setters
-
 
     public UUID getUuid() {
         return uuid;

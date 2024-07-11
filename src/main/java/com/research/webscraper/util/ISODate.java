@@ -47,15 +47,4 @@ public class ISODate {
     public String toString() {
         return getIsoString();
     }
-
-    // Ejemplo de uso
-    public static void main(String[] args) {
-        String jsonTimestamp = "2024-07-09T10:52:43.643+00:00";
-        ISODate myDate = new ISODate(jsonTimestamp);
-
-        System.out.println(myDate); // 2024-07-09T10:52:33.396Z
-        System.out.println("Year: " + myDate.getYear());
-        System.out.println("Month: " + myDate.getMonth());
-        System.out.println("Day: " + myDate.getDay());
-    }
 }

@@ -1,12 +1,18 @@
 package com.research.webscraper.model;
 
-import org.springframework.data.relational.core.mapping.Column;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
+@Embeddable
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Shipping {
-    @Column("item_is_shippable")
+
+    @Column(name = "item_is_shippable")
     private boolean itemIsShippable;
 
-    @Column("user_allows_shipping")
+    @Column(name = "user_allows_shipping")
     private boolean userAllowsShipping;
 
     // Getters y setters
